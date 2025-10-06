@@ -1,0 +1,24 @@
+/* static/css/custom.css */
+body {
+    font-family: 'Arial', sans-serif;
+}
+.carousel-item img {
+    max-height: 500px;
+    object-fit: cover;
+}
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+.btn-primary {
+    background-color: #004aad; /* Jaspax brand color (example) */
+    border-color: #004aad;
+    float: left;
+}
+.navbar-brand, .nav-link {
+    color: #004aad !important;
+}
+
+footer {
+    background-color: #f8f9fa;
+}

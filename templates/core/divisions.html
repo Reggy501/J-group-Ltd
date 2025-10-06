@@ -1,0 +1,112 @@
+<!-- templates/core/divisions.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Divisions{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">Our Divisions</h2>
+        <div class="row mb-4">
+            <div class="col-md-6 offset-md-3">
+                <form method="get" action="{% url 'core:divisions' %}">
+                    <div class="input-group shadow-sm rounded-3 overflow-hidden">
+                        <input type="text" name="q" class="form-control border-0" placeholder="Search by name or sector" value="{{ request.GET.q }}">
+                        <button type="submit" class="btn btn-primary px-4">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row g-4 division-fadein animate__animated animate__fadeInUp">
+            {% for division in divisions %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card border-0 shadow-lg h-100 division-card position-relative overflow-hidden animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}00ms;">
+                    <div class="division-img-wrapper position-relative">
+                        {% if division.image %}
+                        <img src="{{ division.image.url }}" class="w-100 division-img" alt="{{ division.name }}">
+                        {% else %}
+                        <img src="{% static 'images/placeholder.jpg' %}" class="w-100 division-img" alt="Placeholder">
+                        {% endif %}
+                        <div class="division-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-3">
+                            <span class="badge bg-primary mb-2 px-3 py-2 fs-6">{{ division.sector }}</span>
+                            <h5 class="text-white fw-bold mb-1">{{ division.name }}</h5>
+                        </div>
+                    </div>
+                    <div class="card-body bg-white d-flex flex-column justify-content-between">
+                        <p class="card-text text-muted small">{{ division.description|truncatewords:25 }}</p>
+                        <a href="{% url 'core:division_detail' division.slug %}" class="btn btn-outline-primary mt-3 w-100 read-more-btn animate__animated animate__pulse animate__infinite">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No divisions found.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<style>
+    .division-card {
+        border-radius: 1.5rem;
+        transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .division-card:hover {
+        box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        transform: translateY(-6px) scale(1.03);
+    }
+    .read-more-btn {
+        border-radius: 2rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+    }
+    .read-more-btn:hover {
+        background: #0d6efd;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(13,110,253,0.15);
+    }
+    .division-img-wrapper {
+        height: 300px;
+        overflow: hidden;
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+    }
+    .division-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.97);
+        transition: filter 0.2s;
+    }
+    .division-card:hover .division-img {
+        filter: brightness(1.03);
+    }
+    .division-overlay {
+        background: linear-gradient(0deg, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.05) 100%);
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        color: #fff;
+        min-height: 80px;
+    }
+    /* Fade-in effect for cards */
+    .division-fadein .division-card {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: fadeInUp 0.7s ease forwards;
+    }
+    .division-fadein .division-card:nth-child(1) { animation-delay: 0.1s; }
+    .division-fadein .division-card:nth-child(2) { animation-delay: 0.2s; }
+    .division-fadein .division-card:nth-child(3) { animation-delay: 0.3s; }
+    .division-fadein .division-card:nth-child(4) { animation-delay: 0.4s; }
+    .division-fadein .division-card:nth-child(5) { animation-delay: 0.5s; }
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+</style>
+{% endblock %}
+{% block extra_js %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+{% endblock %}

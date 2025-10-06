@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ division.name }} | Division Details{% endblock %}
+{% block content %}
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 mb-4 mb-md-0">
+                {% if division.image %}
+                <img src="{{ division.image.url }}" class="img-fluid rounded-4 shadow-lg w-100" alt="{{ division.name }}">
+                {% else %}
+                <img src="{% static 'images/placeholder.jpg' %}" class="img-fluid rounded-4 shadow-lg w-100" alt="Placeholder">
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <span class="badge bg-primary px-3 py-2 fs-6 mb-3">{{ division.sector }}</span>
+                <h2 class="fw-bold mb-3">{{ division.name }}</h2>
+                <p class="lead text-muted mb-4">{{ division.description }}</p>
+            </div>
+        </div>
+        {% if gallery_images %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <h4 class="fw-semibold mb-4 text-center">Gallery</h4>
+                <div class="row g-4 justify-content-center">
+                    {% for img in gallery_images %}
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div class="gallery-img-wrapper position-relative animate__animated animate__fadeInUp">
+                            <img src="{{ img.image.url }}" class="img-fluid rounded-3 shadow-sm w-100" alt="{{ img.caption|default:'Division Image' }}">
+                            {% if img.caption %}
+                            <div class="gallery-caption bg-dark bg-opacity-75 text-white px-3 py-2 rounded-bottom position-absolute bottom-0 start-0 w-100 small text-center">{{ img.caption }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="text-center mt-5">
+            <a href="{% url 'core:divisions' %}" class="btn btn-outline-secondary px-4 py-2 rounded-pill">&larr; Back to Divisions</a>
+        </div>
+    </div>
+</section>
+<style>
+    .gallery-img-wrapper {
+        overflow: hidden;
+        border-radius: 1.25rem;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        transition: transform 0.25s, box-shadow 0.25s;
+        position: relative;
+        min-height: 220px;
+        background: #f8f9fa;
+    }
+    .gallery-img-wrapper img {
+        object-fit: cover;
+        width: 100%;
+        height: 220px;
+        transition: transform 0.3s, filter 0.3s;
+        filter: brightness(0.98);
+    }
+    .gallery-img-wrapper:hover img {
+        transform: scale(1.06) rotate(-1deg);
+        filter: brightness(1.04) saturate(1.1);
+    }
+    .gallery-caption {
+        font-size: 0.98rem;
+        border-bottom-left-radius: 1.25rem;
+        border-bottom-right-radius: 1.25rem;
+        opacity: 0.92;
+    }
+</style>
+{% endblock %}

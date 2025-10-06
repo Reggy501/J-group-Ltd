@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+
+<!-- Hero Banner -->
+<section class="py-5 position-relative bg-primary text-white" style="background: linear-gradient(90deg, #004aad 60%, #007bff 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-5 fw-bold mb-2">{{ article.title }}</h1>
+                <p class="mb-0 small">Published on {{ article.publish_date|date:"F d, Y" }} by {{ article.author|default:"Jaspax Team" }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- News Content Card -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                    {% if article.image %}
+                    <div class="news-detail-img-wrapper position-relative">
+                        <img src="{{ article.image.url }}" class="w-100 news-detail-img" alt="{{ article.title }}">
+                    </div>
+                    {% endif %}
+                    <div class="card-body p-4">
+                        <div class="mb-4 fs-5 lh-lg">{{ article.content|linebreaks }}</div>
+                        <a href="{% url 'news:news_list' %}" class="btn btn-outline-primary px-4">&larr; Back to News</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .news-detail-img-wrapper {
+        max-height: 350px;
+        overflow: hidden;
+    }
+    .news-detail-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+    }
+</style>
+{% endblock %}

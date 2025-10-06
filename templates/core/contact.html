@@ -1,0 +1,92 @@
+<!-- templates/core/contact.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+<section class="contact-hero position-relative text-white" style="background: url('{% static 'images/contact-bg.jpg' %}') center/cover no-repeat; min-height: 320px;">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1 class="display-5 fw-bold mb-2">Contact Us</h1>
+                <p class="lead mb-0">We'd love to hear from you. Reach out for business, partnership, or general inquiries.</p>
+            </div>
+        </div>
+    </div>
+    <div class="contact-hero-overlay position-absolute top-0 start-0 w-100 h-100" style="background:rgba(0,0,0,0.45);"></div>
+</section>
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <div class="bg-white rounded-4 shadow p-4 h-100">
+                    <h4 class="fw-bold mb-3 text-primary">Send Us a Message</h4>
+                    {% if messages %}
+                    <div class="mb-3">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <form id="contactForm" method="post" action="{% url 'core:contact' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">Full Name</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email Address</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_message" class="form-label">Message</label>
+                            {{ form.message }}
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100 py-2 fw-semibold rounded-pill">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="bg-white rounded-4 shadow p-4 h-100">
+                    <h4 class="fw-bold mb-3 text-primary">Contact Information</h4>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="fas fa-map-marker-alt fa-lg text-warning me-3"></i>
+                            <span>Jaspax Group HQ, Dar es Salaam, Tanzania</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="fas fa-phone fa-lg text-warning me-3"></i>
+                            <span>+255 123 456 789</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="fas fa-envelope fa-lg text-warning me-3"></i>
+                            <span>info@jaspax.com</span>
+                        </li>
+                    </ul>
+                    <h5 class="fw-bold mb-2">Business Hours</h5>
+                    <p class="mb-0">Monday - Friday: 8:00am - 5:00pm<br>Saturday: 9:00am - 1:00pm</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+.contact-hero {
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.contact-hero-overlay {
+    z-index: 1;
+}
+.contact-hero .container, .contact-hero h1, .contact-hero p {
+    position: relative;
+    z-index: 2;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+{% endblock %}

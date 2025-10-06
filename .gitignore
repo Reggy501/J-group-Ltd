@@ -1,0 +1,16 @@
+# Python/Django
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.sqlite3
+*.log
+
+# IDE/Editor files
+.vscode/
+
+
+# Static files (if collected)
+staticfiles/

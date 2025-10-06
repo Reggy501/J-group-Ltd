@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About Us{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="py-5 bg-white position-relative">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <h1 class="display-4 fw-bold mb-3">About Jaspax Group Ltd</h1>
+                <p class="lead text-secondary mb-4">
+                    {% if about_page.about_us %}
+                        {{ about_page.about_us }}
+                    {% elif about_page.history_text %}
+                        {{ about_page.history_text }}
+                    {% else %}
+                        Jaspax Group Ltd is a diversified conglomerate with a strong presence across multiple sectors, committed to driving growth, innovation, and sustainable development in Africa and beyond.
+                    {% endif %}
+                </p>
+            </div>
+            <div class="col-md-5 text-center">
+                <img src="{% static 'images/newz.jpg' %}" alt="About Jaspax" class="img-fluid rounded-4 shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Company Overview -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h2 class="fw-bold mb-3 text-center">Who We Are</h2>
+                <p class="fs-5 text-center">
+                    {{ about_page.history_text|default:"Founded in 1990, Jaspax Group Ltd has grown to become one of the region's most respected business groups, with interests in manufacturing, trading, logistics, agriculture, and more. Our commitment to excellence, integrity, and community impact drives everything we do." }}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision, Mission, Values -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="p-4 bg-white rounded-4 shadow-sm h-100">
+                    <i class="fas fa-eye fa-2x text-primary mb-3"></i>
+                    <h5 class="fw-bold">Our Vision</h5>
+                    <p class="mb-0">{{ about_page.vision_text|default:"To be a global leader in sustainable business practices, delivering value to all stakeholders." }}</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="p-4 bg-white rounded-4 shadow-sm h-100">
+                    <i class="fas fa-bullseye fa-2x text-success mb-3"></i>
+                    <h5 class="fw-bold">Our Mission</h5>
+                    <p class="mb-0">{{ about_page.mission_text|default:"To innovate, diversify, and empower communities through responsible business and strategic partnerships." }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 bg-white rounded-4 shadow-sm h-100">
+                    <i class="fas fa-handshake fa-2x text-warning mb-3"></i>
+                    <h5 class="fw-bold">Our Values</h5>
+                    <p class="mb-0">{{ about_page.values_text|default:"Integrity, Excellence, Innovation, Sustainability, and Social Responsibility." }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Milestones / Timeline -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-4">Our Journey</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <ul class="timeline list-unstyled">
+                    <li class="mb-4">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary me-3">2022</span>
+                            <span>Jaspax Group Ltd is founded.</span>
+                        </div>
+                    </li>
+                    <li class="mb-4">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary me-3">2023</span>
+                            <span>Expanded into manufacturing and logistics sectors.</span>
+                        </div>
+                    </li>
+                    <li class="mb-4">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary me-3">2024</span>
+                            <span>Launched major sustainability initiatives.</span>
+                        </div>
+                    </li>
+                    <li class="mb-4">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary me-3">2025</span>
+                            <span>Recognized as a top employer and industry leader.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .timeline li {
+        position: relative;
+        padding-left: 1.5rem;
+        border-left: 3px solid #0d6efd;
+    }
+    .timeline li:last-child {
+        border-left: none;
+    }
+    .timeline .badge {
+        font-size: 1rem;
+        padding: 0.5em 1em;
+    }
+</style>
+
+{% endblock %}
